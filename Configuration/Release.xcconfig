@@ -1,0 +1,6 @@
+#include "Base.xcconfig"
+
+VALIDATE_PRODUCT = YES
+COPY_PHASE_STRIP = YES
+STRIP_INSTALLED_PRODUCT = YES
+STRIP_STYLE = debugging

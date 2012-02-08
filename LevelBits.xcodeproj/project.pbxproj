@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0A6AF8CC14E204D600107415 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6AF8CB14E204D600107415 /* Foundation.framework */; };
 		0A6AF8D214E204D600107415 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A6AF8D014E204D600107415 /* InfoPlist.strings */; };
+		0A6AF8E414E214F100107415 /* LBDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A6AF8E214E214F100107415 /* LBDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0A6AF8E514E214F100107415 /* LBDB.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0A6AF8E314E214F100107415 /* LBDB.mm */; };
+		0A6AF8E814E230DE00107415 /* libleveldb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6AF8E714E230DE00107415 /* libleveldb.a */; };
+		0A6AF8EA14E231AE00107415 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A6AF8E914E231AE00107415 /* libstdc++.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +21,14 @@
 		0A6AF8CF14E204D600107415 /* LevelBits-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LevelBits-Info.plist"; sourceTree = "<group>"; };
 		0A6AF8D114E204D600107415 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0A6AF8D314E204D600107415 /* LevelBits-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LevelBits-Prefix.pch"; sourceTree = "<group>"; };
+		0A6AF8DA14E2123800107415 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		0A6AF8DB14E2123800107415 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		0A6AF8DC14E2123800107415 /* LevelBits.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = LevelBits.xcconfig; sourceTree = "<group>"; };
+		0A6AF8DD14E2123800107415 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		0A6AF8E214E214F100107415 /* LBDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBDB.h; sourceTree = "<group>"; };
+		0A6AF8E314E214F100107415 /* LBDB.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LBDB.mm; sourceTree = "<group>"; };
+		0A6AF8E714E230DE00107415 /* libleveldb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libleveldb.a; path = Library/libleveldb.a; sourceTree = "<group>"; };
+		0A6AF8E914E231AE00107415 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -25,6 +37,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A6AF8CC14E204D600107415 /* Foundation.framework in Frameworks */,
+				0A6AF8E814E230DE00107415 /* libleveldb.a in Frameworks */,
+				0A6AF8EA14E231AE00107415 /* libstdc++.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -36,7 +50,9 @@
 			children = (
 				0A6AF8CD14E204D600107415 /* LevelBits */,
 				0A6AF8CA14E204D600107415 /* Frameworks */,
+				0A6AF8E614E230C900107415 /* Libraries */,
 				0A6AF8C914E204D600107415 /* Products */,
+				0A6AF8D914E2123800107415 /* Configuration */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +75,8 @@
 		0A6AF8CD14E204D600107415 /* LevelBits */ = {
 			isa = PBXGroup;
 			children = (
+				0A6AF8E214E214F100107415 /* LBDB.h */,
+				0A6AF8E314E214F100107415 /* LBDB.mm */,
 				0A6AF8CE14E204D600107415 /* Supporting Files */,
 			);
 			path = LevelBits;
@@ -74,6 +92,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0A6AF8D914E2123800107415 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				0A6AF8DA14E2123800107415 /* Base.xcconfig */,
+				0A6AF8DB14E2123800107415 /* Debug.xcconfig */,
+				0A6AF8DC14E2123800107415 /* LevelBits.xcconfig */,
+				0A6AF8DD14E2123800107415 /* Release.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		0A6AF8E614E230C900107415 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				0A6AF8E714E230DE00107415 /* libleveldb.a */,
+				0A6AF8E914E231AE00107415 /* libstdc++.dylib */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -81,6 +119,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6AF8E414E214F100107415 /* LBDB.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +153,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Kevin O'Neill";
 			};
 			buildConfigurationList = 0A6AF8BF14E204D600107415 /* Build configuration list for PBXProject "LevelBits" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -177,6 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A6AF8E514E214F100107415 /* LBDB.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,73 +237,29 @@
 /* Begin XCBuildConfiguration section */
 		0A6AF8D414E204D600107415 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A6AF8DB14E2123800107415 /* Debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
 		0A6AF8D514E204D600107415 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A6AF8DD14E2123800107415 /* Release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		0A6AF8D714E204D600107415 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A6AF8DC14E2123800107415 /* LevelBits.xcconfig */;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LevelBits/LevelBits-Prefix.pch";
-				INFOPLIST_FILE = "LevelBits/LevelBits-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
 		};
 		0A6AF8D814E204D600107415 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A6AF8DC14E2123800107415 /* LevelBits.xcconfig */;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LevelBits/LevelBits-Prefix.pch";
-				INFOPLIST_FILE = "LevelBits/LevelBits-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
 		};
@@ -285,6 +282,7 @@
 				0A6AF8D814E204D600107415 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,21 @@
+//
+//  LBDB.h
+//  LevelBits
+//
+//  Created by Kevin O'Neill on 8/02/12.
+//  Copyright (c) 2012 Kevin O'Neill. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+extern NSString *LBLevelErrorDomain;
+
+@interface LBDB : NSObject
+
+- (id)initWithPath:(NSString *)path;
+
+- (id <NSCoding>)objectForKey:(id <NSCoding>)key error:(NSError **)error;
+- (BOOL)setObject:(id <NSCoding>)value forKey:(id <NSCoding>)key error:(NSError **)error;
+- (BOOL)removeObjectForKey:(id <NSCoding>)key error:(NSError **)error;
+
+@end
