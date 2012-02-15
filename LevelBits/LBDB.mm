@@ -37,15 +37,25 @@ static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
   return [NSKeyedUnarchiver unarchiveObjectWithData:data]; 
 }
 
+static inline NSString * lb_string_for_slice(leveldb::Slice slice)
+{
+  return [[[NSString alloc] initWithBytes:slice.data() length:slice.size() encoding:NSUTF8StringEncoding] autorelease];
+}
+
+static inline leveldb::Slice lb_slice_for_string(NSString *string)
+{
+  return leveldb::Slice((char *)[string UTF8String], [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]);
+}
+
 @interface LBDB ()
 {
+  NSString *path_;
   leveldb::DB *db_;
 }
 
 - (BOOL)store:(leveldb::Slice)value forKey:(leveldb::Slice)key error:(NSError **)error;
 - (BOOL)deleteKey:(leveldb::Slice)key error:(NSError **)error;
 - (id <NSCoding>)readObjectForKey:(leveldb::Slice)key error:(NSError **)error;
-
 
 @end
 
@@ -55,11 +65,23 @@ static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
 {
   if ((self = [super init]))
   {
-    leveldb::Options options;
-    options.create_if_missing = true;
+    BOOL is_viable = [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
     
-    leveldb::Status status = leveldb::DB::Open(options, [path UTF8String], &db_);
-    if (!status.ok())
+    if (is_viable)
+    {
+      path_ = [path copy];
+      
+      leveldb::Options options;
+      options.create_if_missing = true;
+      
+      leveldb::Status status = leveldb::DB::Open(options, [path_ UTF8String], &db_);
+      if (!status.ok())
+      {
+        is_viable = NO;
+      }
+    }
+    
+    if (!is_viable)
     {
       [self autorelease];
       return nil;
@@ -77,8 +99,22 @@ static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
   return [self initWithPath:path];
 }
 
+- (void)destroy;
+{  
+  if (db_ != NULL)
+  { 
+    delete db_;
+    db_ = NULL;
+  }
+  
+  leveldb::Options options;
+  leveldb::DestroyDB([path_ UTF8String], options);  
+}
+
 - (void)dealloc
 {
+  [path_ release];
+  
   if (db_ != NULL)
   { 
     delete db_;
@@ -87,21 +123,20 @@ static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
   [super dealloc];
 }
 
-- (BOOL)setObject:(id <NSCoding>)value forKey:(id <NSCoding>)key error:(NSError **)error;
+- (BOOL)setObject:(id <NSCoding>)value forKey:(NSString *)key error:(NSError **)error;
 {
-  return [self store:lb_slice_for_object(value) forKey:lb_slice_for_object(key) error:error];
+  return [self store:lb_slice_for_object(value) forKey:lb_slice_for_string(key) error:error];
 }
 
-- (id <NSCoding>)objectForKey:(id <NSCoding>)key error:(NSError **)error;
+- (id <NSCoding>)objectForKey:(NSString *)key error:(NSError **)error;
 {
-  return [self readObjectForKey:lb_slice_for_object(key) error:error];
+  return [self readObjectForKey:lb_slice_for_string(key) error:error];
 }
 
-- (BOOL)removeObjectForKey:(id <NSCoding>)key error:(NSError **)error;
+- (BOOL)removeObjectForKey:(NSString *)key error:(NSError **)error;
 {
-  return [self deleteKey:lb_slice_for_object(key) error:error];
+  return [self deleteKey:lb_slice_for_string(key) error:error];
 }
-
 
 #pragma mark - Slice Operations
 
@@ -128,7 +163,7 @@ static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
     *error = lb_error_for_status(lb_error_read, &status);
   }
   
-  return lb_object_for_slice(result);
+  return status.IsNotFound() ? nil : lb_object_for_slice(result);
 }
 
 - (BOOL)deleteKey:(leveldb::Slice)key error:(NSError **)error;

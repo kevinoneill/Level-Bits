@@ -14,8 +14,8 @@ extern NSString *LBLevelErrorDomain;
 
 - (id)initWithPath:(NSString *)path;
 
-- (id <NSCoding>)objectForKey:(id <NSCoding>)key error:(NSError **)error;
-- (BOOL)setObject:(id <NSCoding>)value forKey:(id <NSCoding>)key error:(NSError **)error;
-- (BOOL)removeObjectForKey:(id <NSCoding>)key error:(NSError **)error;
+- (id <NSCoding>)objectForKey:(NSString *)key error:(NSError **)error;
+- (BOOL)setObject:(id <NSCoding>)value forKey:(NSString *)key error:(NSError **)error;
+- (BOOL)removeObjectForKey:(NSString *)key error:(NSError **)error;
 
 @end
