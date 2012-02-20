@@ -152,7 +152,7 @@
 		0A6AF8BC14E204D600107415 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Kevin O'Neill";
 			};
 			buildConfigurationList = 0A6AF8BF14E204D600107415 /* Build configuration list for PBXProject "LevelBits" */;
