@@ -33,8 +33,8 @@ static inline leveldb::Slice lb_slice_for_object(id <NSCoding> object)
 
 static inline id <NSCoding> lb_object_for_slice(leveldb::Slice slice)
 {
-  NSData *data = [NSData dataWithBytes:slice.data() length:slice.size()];
-  return [NSKeyedUnarchiver unarchiveObjectWithData:data]; 
+  NSData *data = [NSData dataWithBytes:slice.data() length:slice.size()];  
+  return [data length] > 0 ? [NSKeyedUnarchiver unarchiveObjectWithData:data] : nil; 
 }
 
 static inline NSString * lb_string_for_slice(leveldb::Slice slice)
