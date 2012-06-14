@@ -144,6 +144,11 @@ static inline leveldb::Slice lb_slice_for_string(NSString *string)
   delete iter;
 }
 
+- (void)compact;
+{
+  db_->CompactRange(NULL, NULL);
+}
+
 - (BOOL)setObject:(id <NSCoding>)value forKey:(NSString *)key error:(NSError **)error;
 {
   return [self store:lb_slice_for_object(value) forKey:lb_slice_for_string(key) error:error];

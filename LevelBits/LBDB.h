@@ -20,5 +20,6 @@ extern NSString *LBLevelErrorDomain;
 - (BOOL)setObject:(id <NSCoding>)value forKey:(NSString *)key error:(NSError **)error;
 - (BOOL)removeObjectForKey:(NSString *)key error:(NSError **)error;
 - (void)enumerateKeysAndValuesUsingBlock:(void (^)(id key, id<NSCoding> value, BOOL *stop))block;
+- (void)compact;
 
 @end
