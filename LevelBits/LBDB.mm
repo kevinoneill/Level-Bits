@@ -123,6 +123,32 @@ static inline leveldb::Slice lb_slice_for_string(NSString *string)
   [super dealloc];
 }
 
+- (void)enumerateKeysAndValuesUsingBlock:(void (^)(id, id<NSCoding>, BOOL *))block;
+{
+  leveldb::ReadOptions options;
+  leveldb::Iterator *iter = db_->NewIterator(options);
+  iter->SeekToFirst();
+  
+  while (iter->Valid())
+  {
+    leveldb::Slice k = iter->key();
+    leveldb::Slice v = iter->value();
+    BOOL stop = NO;
+    
+    block(lb_string_for_slice(k), lb_object_for_slice(v), &stop);
+    if (stop) break;
+    
+    iter->Next();
+  }
+  
+  delete iter;
+}
+
+- (void)compact;
+{
+  db_->CompactRange(NULL, NULL);
+}
+
 - (BOOL)setObject:(id <NSCoding>)value forKey:(NSString *)key error:(NSError **)error;
 {
   return [self store:lb_slice_for_object(value) forKey:lb_slice_for_string(key) error:error];
